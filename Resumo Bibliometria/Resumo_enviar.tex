@@ -1,0 +1,87 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{indentfirst}
+\usepackage{chemformula}
+\begin{document}
+\section{Motivação Inicial}
+
+Com o enorme avanço tecnológico que se vem ocorrendo nos últimos anos, a quantidade de poluição vem crescendo exponencialmente, prejudicando ecossistemas, o equilíbrio natural e até mesmo a vida humana. \par
+
+A poluição do ar é um dos problemas ambientais mais graves que o mundo enfrenta atualmente. Ela é resultado de uma série de fatores, como a queima de combustíveis fósseis, emissões de gases tóxicos e fumaça liberada por indústrias, queima de lixo, entre outros. \par
+
+Uma grande consequência desse aumento da poluição é a maior liberação de gases de efeito estufa, como CFC's, aerosóis e em principal o \ch{CO2}. Sendo ele um dos poluentes mais liberados pela humanidade.
+Diante dessa problematica e alinhada com os objetivos da ONU de desenvolvimento sustentável, se tem a necessidade de um monitoramento mais rigoroso da liberação desses gases. \par
+
+Nos últimos anos, um novo método de análise surgiu que vem se provando muito eficiente e sendo usado, principalmente para a medição de CO2, que é a utilização de satélites.
+Essa tecnologia vem se mostrando muito promissora, principalmente devido ao fato que medições comum, \textit{in situ}, são bastante ineficientes quando precisa se medir em grande escala e outros métodos não apresentam uma boa eficiência. \par
+
+Com a utilização de satélites, por sua vez, devido sua órbita, consegue-se medir em enorme escala, e a depender, de como suas revoluções acontecem ao redor da Terra, o mesmo local diversas vezes.
+Essa nova tecnologia aparenta bastante promissora, porém, como qualquer outra, apresenta dificuldades quanto a sua implementação e medições, fazendo com que seu uso ainda seja relativamente novo e de difícil implementação.
+
+\section{Medição por satélites}
+
+A medição de co2 por satélites é um método bastante recente que toma vantagem das diferentes bandas de absorção do carbono. Um raio luminoso é disparado do satélite onde ele atravessa a atmosfera, sendo absorvido pelos átomos dos gases presentes. Então, com sua eventual refração, consegue-se medir a composição, aproximada de X\ch{CO2}, que é a coluna de \ch{CO2} presente.
+Como esse método é extremamente dependente da luz, qualquer outra refração ou absorção causada, seja por nuvens, poluentes, aerosóis, causa uma grande imprecisão na leitura. \par
+
+Um dos grandes problemas desse método é a sua precisão. Espécies como o oxigênio, que possuem bandas próximas do \ch{CO2}, assim como nuvens, aerossóis e até mesmo raios solares possuem uma grande interferência na precisão da medição.
+Além disso, diferentes satélites tem métodos de varredura completamente distintos, causando fluxos de dados com diferenças significativas, que faz com que a comparação entre eles seja difícil. \par
+
+\section{Algoritmos de medição}
+
+Fazer a medição é apenas uma parte do trabalho. Uma questão bastante complicada, muitas vezes a causadora grande de problemas são os algoritmos utilizados.
+Como já falado, os principais satélites utilizam de diferentes meios de medição, logo, para cada satélite foi-se desenvolvido um algoritmo diferente. \par
+
+Para o OCO-2, por exemplo, a Nasa utiliza um algoritmo chamado \textit{ACOS}, que utiliza de um método de \textit{Maximum Likelihood Estimation} para fazer a medição. Esse algoritmo possui uma falha, que ele não consegue lidar com nuvens muito bem, então, em dias nublados, as medições não serão as mais acuradas. \par
+
+Analisando o GOSAT, utiliza um algoritmo chamado \textit{NIES}, que utiliza do método de \textit{Maximum Likelihood Estimation}. Esse método também inclui um algoritmo de detecção de nuvens e também utiliza dados das bandas espectrais do metano e oxigênio para optimizar melhor seus cálculos. \par
+
+Além disso, existem outros métodos, desenvolvidos para esses satélites, mas por equipes independentes, como o método \textit{UoL-FP}, desenvolvido pela universidade de Leicester para o satélite OCO-2. Esse modelo é bastante robusto, simulando uma atmosfera e fazendo tratamento para aerossóis e nuvens durante os cálculos desenvolvidos. \par
+
+Pode ser observado uma enorme variedade de algoritmos, cada um com suas variáveis e métodos de cálculo, fazendo com que a comparação entre eles seja bastante complicada. Com isso, existe uma grande dificuldade de validação cruzada entre ele, dificultando a acurácia e promovendo erros. \par
+
+\section{Objetivos e Metodologia}
+
+Os objetivos que temos para esse trabalho são
+\begin{itemize}
+	\item Fazer uma análise bibliométrica dos artigos publicados sobre métodos de tratamento de dados de satélites;
+	\item fazer uma leitura e análise dos métodos estatísticos utilizados por esses algoritmos;
+	\item Realizar uma síntese e comparação entre eles;
+	\item Realizar uma possível crítica aos principais métodos
+\end{itemize}
+
+Portanto, uma grande parte do trabalho é a realização de uma análise bibliométrica detalhada, sendo necessário, portanto, a escolha adequada do satélite para qual será analisado. As escolhas principais ficam entre o OCO-2 e o GOSAT, ambos já pela enorme quantidade de métodos desenvolvidos e suas enormes importâncias para a comunidade científica. \par
+
+\subsection{Análise Bibliométrica}
+Faz-se necessário também, a escolha correta das palavras-chave para a busca dos artigos de interesse, já que uma escolha incorreta levaria a uma gama de artigos não muito útil. A pesquisa preliminar realizada na "Web of Science" foram:
+
+(Measurement* OR quantifying OR prediction*) AND ((atmospheric* AND (carbon OR CO2 OR XCO2 )) AND
+(stock* OR pool* OR emission* OR sink* OR budget OR  source*)) AND satellite* \\
+
+Onde foram buscados tanto nos resumos, títulos e palavras-chave. Essa pesquisa gerou um total de 783 artigos. Esse número é extremamente significativo, precisando de uma filtragem maior, já que uma análise completa seria algo astronômico. \par
+
+Foi proposta então uma limitação, onde só seriam analisados artigos que falassem de um dos satélites
+já citados, o \textit{OCO-2} ou o \textit{GOSAT}. Limitando para o \textit{GOSAT}, utilizando as
+palavras-chave: \\
+(Measurement* OR quantifying OR prediction*) AND ((atmospheric* AND (carbon OR CO2 OR
+XCO2 )) AND (stock* OR pool* OR emission* OR sink* OR budget OR  source*)) AND satellite* AND GOSAT.\\
+Gerando um resultado de 83 artigos. Um número consideravelmente menor e já palpável quanto sua possibilidade.  \par
+Por sua vez, quando limitados para o \textit{OCO-2}, utilizando as palavras-chave: \\
+(Measurement* OR
+quantifying OR prediction*) AND ((atmospheric* AND (carbon OR CO2 OR XCO2 )) AND (stock* OR pool* OR
+emission* OR sink* OR budget OR  source*)) AND satellite* AND OCO-2.\\
+Gerando um resultado de 64 artigos. Sendo um número bem menor e mais possível de ser analisado. \par
+Uma das maiores dificuldades que vem acontecendo é a apreensão quanto a escolha das palavras-chave. Enquanto não queremos limitar demais a pesquisa a ser feita, existe um limite quanto a quantidade de artigos que podem ser analisados. Enquanto a quantia de 93 é relativamente palpável, ainda possuímos algumas incertezas quanto a:
+\begin{itemize}
+    \item Essas palavras-chave são suficientes? Estamos deixando uma de lado que é muito importante?
+    \item Essas palavras-chave são muito limitantes? Estamos deixando de fora artigos que são importantes?
+    \item A limitação quanto aos satélites é boa?
+    \item Esses satélites são os mais importantes? Existe outro que mostra mais relevante que esses?
+\end{itemize}
+\section{Resultados Esperados}
+
+Se espera que com esse trabalho, seja possível fazer uma análise mais detalhada dos métodos utilizados para o tratamento de dados de satélites, assim como uma comparação entre eles, fazendo com que seja possível uma melhor compreensão dos métodos utilizados e uma crítica aos mesmos. \par
+
+Ademais, se espera que com esse trabalho se crie uma base sólida para a realização de pesquisa futuras e com uma possibilidade de uma entrada na gama de criação de ideias ou melhorias aos atuais algoritmos empregados.
+
+\end{document}

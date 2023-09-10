@@ -1,0 +1,111 @@
+\chapter{Entropia de Shannon}
+\section{Uma Introdução ao conceito de entropia}
+\subsection{A diferença entre Termodinamcia e Estatistica}
+Bom, inicialmente muito se fala quanto a entropia, porém muito no sentido termodinamico. Em suma é
+uma medida da quantidade de estados que as moleculas de uma determinada podem estar. No exemplo
+classico, a agua no estado solido é aquela que apresenta menor entropia, a liquida com uma entropia
+média e o vapor com uma entropia alta. Tal valor, geralmente denominado de \(S\) é calculado pela
+formula de Boltzmann para gas ideal, mas muitas vezes pode ser calculada e observada
+empiricamente.\par
+
+Enquanto a entropia de Shannon, num sentido mais estatistico e de teoria da informação, tem uma
+certa relação com isso, não será o foco da escrita. Mas claro, não se poderia deixar passar batido
+essa comparação. Em seu trabalho seminal, lançando em 1948, onde ele coloca as fundações da teoria
+da informação, tal trabalho de Shannon foi muito produto de sua epoca, pois a grande maioria do que
+foi colocado foi desenvolvido para ser usado na segunda guerra mundial, tanto para classificar a
+informação de transmissão de radios, quanto para transmitir mensagens codificadas, quanto para
+decifra-las. Enquanto tambem não o foco do que sera escrito, é interessante saber o contexto
+historico \par.
+
+\subsection{Informações e Bits}
+Em computação vemos os bits em tudo quanto é lugar. Nossa velocidade da internet é medida em bits,
+em geral uma ordem de grande superior, megas ou até gigas, e nosso armazenamento tambem, geralmente
+em gigas ou teras. Mas o que realmente são bits? Imaginemos que, por exemplo, uma variavel possa
+assumir apenas dois valores 0 ou 1. Ela teria apenas um bit de informação, pois assumiria apenas 2
+valores. Se tivermos apenas uma letra, por exemplo, quantos bits ela teria? Se tivermos \(n\) tipos
+de informações, vamos precisar de \(\log_{2}(n) \) bits. Para um alfabeto de \(26\) letras, vamos
+precisar de \(\log_2(26) \approx 4.7\) para essa uma letra. Isso supondo que cada letra tenha uma
+probabilidade igual de ser escolhida. \par
+
+Vamos pensar agora como podemos construir para nossa entropia de Shannon. Com mais um exemplo de
+bits. Com a mesma ideia do alfabeto, se quisermos, por exemplo, escrever uma frase com 5 palavras,
+quantos bits precisariamos? Para cada letra, teriamos 4.7 bits, se cada uma delas for independente e
+de igual probabilidades, podemos so pegar e somar 4.7 5 vezes. De fato, podemos fazer isso para
+qualquer palavra, desde que não tenha espaço, ou caracteres especiais, claro. Então para uma palavra
+de \(m\) letras, precisariamos de \(m*4.7\) bits. Vamos pensar então, é muito mais facil, por
+exemplo, tentar acertar uma palavra de 3 letras, do que uma palavra de 10. A quantidade de bits está
+relacionado com essa 'facilidade'? Mantenhamos esse questionamento em mente
+
+\subsection{Conhecimento}
+
+Continuando nossa analogia no alfabeto. Vamos supor que temos uma palavra de 5 letras e você precise
+decifra-la. Inicialmente você não tem conhecimento nenhum, todas as letras são igualmente provaveis.
+Mas agora, suponha que eu te diga, existe a letra a nessa palavra. Você ja ganhou algum
+conhecimento. Mas você conseguiria quantifica-lo? Em uma ideia mais trivial e popular, você pode até
+pensar, tal letra é bastante comum na lingua portuguesa, foi-se revelado, obviamente, que apenas
+palavras contendo apenas as outras vogais são validas. Não reduziu-se tanto, então, nosso espaço de
+possibilidades. Por outro lado, se eu te falasse que contem a letra z. Já é uma boa ajuda, pois a
+letra z é bastante incomum, então você acaba ganhando mais informação no geral quando te falo tal
+dado. Para quantificar esse conhecimento ganho, podemos colocar como
+\begin{equation}\label{eq:Ganho de informacao}
+    G(B|A)=\log _2 \frac{1}{p(B)}=-\log _2(p(B))
+\end{equation}
+Onde temos A e B como um espaço de probabilidade, tal que \(B \subset A\). O ganho de informação é
+sempre positivo. Ademais, ele obdece a propriedade que se \(B\subset C\subset A\) , temos que
+\begin{align}
+    G(C|A)=-\log _2p(C)\\
+    G(B|C)=-\log _2p(B|C)=-\log _2\frac{p(B)}{p(C)}
+\end{align}
+Ou seja, o ganho que se tem descobrir que ele pertence a \(B\) depois de saber que pertence a \(C\)
+é a razão das probabilidades de \(B\) e \(C\). Por consequencia, \(G(B|A)=G(C|A)+G(B|C)\) Portanto,
+dado o espaço de probabilidades \(A=(a_1,a_2,...,a_n)\), se tivermos um ganho dado por
+\(G=-\log p(a_n)\) o ganho médio esperado é dado por:
+\begin{equation}\label{eq:Entropia de shannon}
+    H(A)=\sum_i p(a_i) -\log p(a_i)
+\end{equation}
+Esse ganho médio tambem pode ser entendido como a quantidade de informação da função densidade de
+probabilidade. Ela não esta relacionada, exclusivamente, com a variavel aleatoria, mas sim com sua
+distribuição. Não é incomum ve-la escrita como \(H(p)\) inves da forma que foi escrita, para não ser
+criada uma confusão.
+
+
+\subsection{Diferenças entre Informação de fisher e Entropia de Shannon}
+
+Lembramos que a informação de fisher se relaciona à curvatura média da nossa função score Como isso
+se relaciona com a entropia. Se fossemos pensar em um sentido mais empirico quanto maior a nossa
+informção, menor seria o nosso caos, ou seja menor seria nossa entropia. Então necessariamente a
+informaçoinformação de fisher seria o inverso da entropia de shannon Não necessarimente. Existe uma
+diferença fundamental entre os dois. A entropia de shannon fundamentalmente se relaciona com o
+conteudo da mennsagem, quanto de informação ela carrega. Porem, por exemplo, digamos que você receba
+uma mensagem Completamente aleatoria, por assim dizer, euma mensagem com um texto claro. Qual delas
+teria a menor entropia: Claramente é aquela que vem com a menagem claramente mais identificada, já
+de antemão para nos. Porem, se fossemos decifrar as duas mensagens, qual você aprenderia mais: Seria
+aquela de maior entropia pois se conseguissemos identificar o que faz com que ela fique aleatoria e
+conseguissemos reproduzi-la de forma similar, aprenderiamos muito mais. Porém geralmente se assume
+que transmissões com maior entropia carregam menos infromações pois demandam menos bits para serem
+transportados. Dentro da teoria original de fisher ele não expressou uma relação direta com a
+entropia, porem, posteriormente foi-se expressado tal relação. Segue que:
+
+\subsection{Pontos importante na Entropia de Shannon}
+Até o momento so fizemos a analise de um fator, ou seja \(H(A)\), onde apenas consideramos a
+distribuição de probabilidades \(A\), mas se por exemplo, fomos considerar um segundo fator, ou
+seja, uma distribuição, \(B\), como ela interagiria com \(A\). Chamando \(p(a_i)\) como a
+probabilidade de \(a_i\) acontecer e \(p(b_j)\) como a probabilidade de \(b_j\) acontecer, temos
+alguns tipos de probabilidades conjuntas. Por exemplo, \(p(a_i,b_j)\) sendo a probabilidade de
+\(a_i,b_j\) acontecerem simultaneamente, \(p(a_i|b_j)\) sendo a probabilidade condicional de \(a_i\)
+acontecer dado que \(b_j\) aconteceu. Chamando a informação media conjunta de \(M(A,B)\), pode
+ser mostrado que:
+\begin{equation}
+    M(A,B)=\sum_{i,j} p(a_i,b_j)\log \frac{p(a_i|b_j)}{p(b_j)}
+\end{equation}
+De forma que pode ser mostrado que \(H(A)\geq M(A,B)\geq 0\) . A interpretação de \(M(A,B)\) é que
+ele nos diz quanto da complexidade de \(H(A)\) é explicada por \(B\) , ou seja, o quanto de \(A\) é
+restringido por \(B\). Ademais, podemos decompor a entropia de Shannon como sendo
+\begin{equation}\label{eq:entropia de shannon decomposta}
+    H(A)=M(A,B)+H(A|B)
+\end{equation}
+Onde \(M(A,B)\) mostra o quanto \(A\) é restringido por \(B\) e \(H(A|B)\) fala a 'liberdade' de
+\(A\) dado a presença de \(B\) . Em Um sistema ecologico, então, isso nos mostraria, por exemplo,
+num sistema presa predator, onde ele é muito restringido pela eficiencia de caça e comida, a
+entropia de Shannon exprime tanto a eficiencia quanto a liberdade. Liberdade essa que se
+relacionaria à liberdade do predador dado a presa.

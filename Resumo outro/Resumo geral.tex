@@ -1,0 +1,208 @@
+\documentclass{report}[12pt]
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{import}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\graphicspath{{Imagens/}}
+\author{}
+\date{}
+\begin{document}
+\chapter{Estudos Iniciais}
+\section{Ideias e outras coisas}
+(Qual a possibilidade de conseguirmos fazer uma regressão, por exemplo, e irmos estimando e atualizando
+os parametros por meio da informação de fisher?)
+Estava pesquisando sobre as limitações e achei interessante o artigo 'Notes on the Limitations of the Empirical Fisher Approximation'
+no qual ele delimita algumas coisas quanto o calculo e aproximações da informação de fisher, em principal
+quanto seu não uso por falta de um método conveniente para que seja usado, principalmente na area de
+deep learning. Ademais uma boa aproximação para que seja calculado, com certo grau de precisão e utilidade
+aparentemente se falta. Eles mostram que enquanto pode ser calculado muitas vezes o valor bruto até 
+rapidamente, quem sabe uma aproximação não seja util, ou talvez tentar traze-lo para o mundo dos computadores
+com um maior peso.\par
+
+Kullback–Leibler divergence/Hellinger distance
+
+
+\section{Informação de Fisher}
+Inicialmente, vamos imaginar a seguinte situação: Eu lhe dou um grafico de uma distribuição normal,
+onde você não sabe onde ela esta centrada, porem sabe qual sua variancia. A partir do grafico dela,
+voce conseguiria deduzir, ou talvez obter alguma informação sobre o valor real de $\mu ^{\star}$?
+Observe às seguintes curvas e tente achar suas medias
+\begin{figure*}[ht]
+    \centering    
+        \includegraphics[scale=0.4]{normal 51.png}
+        \caption{Normal com variância 1}
+        \label{fig:Normal 51}
+\end{figure*}
+\begin{figure*}[ht]
+    \centering    
+        \includegraphics[scale=0.4]{normal 57.png}
+        \caption{Normal com variância 7}
+        \label{fig:Normal 57}
+\end{figure*}
+Em uma é muito mais facil identificar onde possivelmente o valor \(\mu ^{\star}\) está, mas digamos
+que precisamos saber o da segunda distribuição e em um caso mais geral, para qualquer distribuição.
+Que valor poderiamos tentar atribuir a quantidade de informações que podemos tirar de uma base de dados?
+A definição da informação de fisher, em dados matematicos é dado por
+\begin{equation}
+    \mathcal{I} _{X}(\theta)= \begin{dcases}
+        \sum_{x \epsilon \chi}(\frac{\mathrm{d}}{\mathrm{d}\theta } \log f(x|\theta))^{2}p_{\theta } (x)  , &\text{se X não é continuo   }  ;\\
+        \int_{\chi}(\frac{\mathrm{d}}{\mathrm{d}\theta } \log f(x|\theta))^{2}p_{\theta } (x)\mathrm{d}x, &\text{se X é continuo }  ;\\
+    \end{dcases} 
+\end{equation}
+O valor \(\frac{\mathrm{d}}{\mathrm{d}\theta } \log f(x|\theta )\) é conhecido como a função score,
+que descreve quão sensitivo é o modelo a uma mudança no \(\theta \) em um \(\theta \) particular. A
+informação de fisher mede a sensitividade da relação entre \(f\) e mudanças no \( \theta \) pesando na
+a sensitividade a cada valor de \(x\) em respeito a probabilidade definida por \(p_{\theta } f(x|\theta )\) 
+Esse peso em relação a \( p(\theta )\) faz com que a informação de fisher seja em relação ao valor
+esperado de \(\theta \). Podemos definir a inforção de fisher em relação a esperança.
+Vamos assumir algumas coisas para depois conferirmos se estamos corretos. Numa normal, sua variancia
+não pode ser zero, mas quanto mais perto de zero estivermos, maior a informação que vamos ter.
+Quanto maior nossa variancia, menor a quantidade de informações que vamos conseguir tirar do nosso parametro.
+Se nosso modelo seguir isso, estamos no caminho certo
+\begin{equation} \scriptstyle
+    \mathcal{I} _X(\theta)=-E(\frac{\mathrm{d^{2}}}{\mathrm{d}x^{2} } \log f(x|\theta ))=
+    \begin{dcases} 
+        \scriptstyle-\sum_{x \epsilon \chi}(\frac{\mathrm{d^{2} }}{\mathrm{d}\theta^{2}  } \log f(x|\theta))^{2}p_{\theta } (x),&\text{\small se X não é continuo };\\
+        \scriptstyle-\int_{\chi}(\frac{\mathrm{d^{2} }}{\mathrm{d}\theta^{2}  } \log f(x|\theta))^{2}p_{\theta } (x)\mathrm{d}x,&\text{\small se X é continuo };\\
+    \end{dcases}
+\end{equation}
+Vamos fazer um exemplo para a Normal.
+\begin{gather*}
+    \intertext{Sabendo que a equação de uma normal é dada por}\\
+    N(\mu,\sigma^{2} )=\frac{1}{\sqrt{2\pi \sigma ^{2}  } } \exp ^{\frac{(x-\mu )^{2}}{2\sigma ^{2} }}\\
+    \intertext{sua função logaritmo é dado por} \\
+    l(\theta)=-\frac{1}{2}\ln (\sigma ^{2}  )-\frac{(x-\mu )^{2}}{2\sigma ^{2} }+c\\
+    \intertext{Como ja temos \(\sigma \), nosso \(\theta \) onde queremos obter informaçã é o \(\mu \) } 
+    \intertext{Logo, colocando \(\mu =\theta \) e achando nossas funções} \\
+    l^\prime_{\theta  }  (\theta)=\frac{x-\theta  }{\sigma^{2} }\\
+    l^{\prime \prime }_{\theta} (\theta)=-\frac{1}{\sigma^{2} }\\
+    \intertext{Fazendo a esperança, temos}\\
+    -E(l^{\prime \prime }_{\theta } (\theta))=\frac{1}{\sigma ^{2} }\\
+\end{gather*}
+Então ela depende apenas da variancia da nossa distribuição. Se observamos os graficos \ref*{fig:Normal 51}
+e \ref*{fig:Normal 57}, observamos que na primeira é mais facil tentar assumir o valor de \(\mu \) enquanto
+na segunda não tanto. Isso condiz com o comportamento do grafico e seus respectivos valores de variancia.
+Então essa nossa discussão foi feita corretamente
+\begin{figure*}[ht]
+    \centering    
+        \includegraphics[scale=0.8]{informação de fisher normal.png}
+        \caption{Infomação de Fisher por Sigma}
+        \label{fig:Info_fish_normal}
+\end{figure*}
+\section{Informação de Fisher e Flips ecologicos (Artigo original)}
+\subsection{Método e equações}
+Um dos pontos principais em que precisamos nos apoiar é a ideia de que em sistemas que estão proximos
+ou em um regime dinamico estatico, possuem valores de variabilidades fixos em suas variaveis de estados
+e qualquer mudança no sistema é manifestada por meio de mudança nas variabilidades. Ou seja,
+se tivermos um vetor de variaveis dados por
+\begin{gather*}
+    \mathbf{X} =
+    \begin{pmatrix}
+        x_ 1 & x_ 2 & \ldots  &  x_ n \\
+    \end{pmatrix}\\
+    \mathbf{\Sigma}=  
+    \begin{pmatrix}
+        \sigma _1 & \sigma _2 & \ldots  &  \sigma _n \\
+    \end{pmatrix}
+\end{gather*}
+Onde \(\mathbf{X} \) é o vetor contendo todos as variaveis do regime e \(\mathbf{\Sigma} \) é o vetor
+contendo todas suas variabilidades, com valores iguais a \(\sigma _1,\sigma _2,\ldots ,\sigma _n\).
+Se o regime fosse estados, esses valores se materiam constantes, ou em um padrão. Caso ele esteja mudando
+os valores de \(\sigma \) mudariam tambem. Dado isso, vamos aplicar a informação de fisher. Utilizando
+a formula:
+\begin{equation}
+    I=\int \frac{1}{p(\varepsilon )}(\frac{\mathrm{d}p(\varepsilon )}{\mathrm{d}\varepsilon  })^{2} \mathrm{d} \varepsilon
+\end{equation}
+ 
+Aonde \(p(\varepsilon )\) é a distribuição de probabilidades do erro,distancia \(\varepsilon \) do valor real.
+Assumindo que o sistema pode ser descrito como dinamico continuo e está num ciclo periodico estavel, podemos
+definir a informação de fisher, depois de uma certa quantia de matematica (fazer isso depois, Marco.), Como:
+\begin{equation}
+    I=\frac{1}{T}\int_{0}^{T} \frac{(R^{\prime \prime }(t))^{2} }{(R^\prime (t))^4} \,\mathrm{d}t 
+\end{equation}
+Isso para apenas um ciclo do sistema. Na forma vetorial
+\begin{equation}
+    I=\frac{1}{T}\int_{0}^{T} \frac{(\mathbf{x}^\prime(t))^T (\mathbf{x}^{\prime \prime}(t))^{2} }{\lVert \mathbf{x^\prime } (t) \rVert ^6} \,\mathrm{d}t
+\end{equation}
+    
+Fazendo uma interpretação. Sendo \(\mathbf{x}^\prime  (t)\) a velocidade do nosso sistema e  similarmente
+\(\mathbf{x}^{\prime \prime }(t)\)  como a aceleração do sistema e pelo nosso desenvolvimento de como chegamos
+nela em primeiro lugar, estamos medindo a variabilidade do nosso sistema durante o tempo que ele passa
+em cada seção da sua trajetoria. Pode ser visto tambem como a mudança de velocidade ao longo da trajetoria.
+Em um sistema de velocidade 0, teriamos uma informação infinita, pois qualquer ponto que pegarmos, 
+ele contera todas as informações, pois ele só teria o mesmo estado. Num sistema sem aceleração, de velocidade constante, nossa informação é
+0, pois se fossemos olhar um ponto da trajetorio no ciclo 0 e no ciclo 1, estariamos vendo o mesmo estado
+nos dois ciclos. Para avaliarmos nossa expressão, uma solução analitica é inviavel, numa grande
+parcela das vezes. \par
+Podemos, então, nos voltar para uma solução numerica que nos dará uma boa solução. A primeira coisa
+que precisamos fazer é uma estimativa da velocidade e da aceleração do sistema. Como muitas vezes
+o intervalo de tempo entre a coleta de dados, no mundo real, não está em intervalos regulares, podemos
+continuar com esses intervalos irregulares, ou podemos interpolar para acharmos dados que são lineares.
+A estimativa é feita usando 3 pontos, onde escolhemos um que é central, um a uma distancia \(\Delta t_p\) 
+e a distancia \(\Delta t_a\), pela formula \(t-\Delta t_p\) e \(t\Delta t_a\) e esses intervalos estão
+relacionados por \(\frac{\Delta t_a}{\Delta t_b}=\alpha \). Pela nossa definição de derivada, temos
+\begin{equation}
+    \mathbf{f^\prime }(t)=\frac{\alpha^{2} \mathbf{f} (t+\Delta t_a)-(\alpha ^{2} -1)\mathbf{f}(t)-\mathbf{f} (t-\alpha \Delta t_a)}{(\alpha ^{2} +\alpha )\Delta t_a} 
+\end{equation}
+e aceleração
+\begin{equation}
+    \mathbf{f} ^{(\prime \prime)}=\frac{\alpha \mathbf{f} (t+\Delta t_a)+\mathbf{f} (t-\alpha \Delta t_a)-(\alpha +1)\mathbf{f} (t)}{(\alpha ^{2} +\alpha )\Delta t_{a}^{2} /2 }
+\end{equation}
+\subsection{Discussão e interpretação do modelo}
+Essas estimativas podem gerar alguma especie de barulho e outros dados. Um jeito de arrumar isso é 
+usando uma média de dois pontos, inves de necessariamente apenas dos valores calculados. Mas o proprio
+calculo de fisher já da uma ajuda em relação a isso. Ademais, não sabemos a peridiciocidade do nosso
+sistema, e quando não sabemos isso, nossa informação vai ficar flutuando entre os calculos. Para isso
+podemos fazer uma estimativa do periodo do sistema, utilizando uma FFT, ou conhecimentos previos. Mas
+a informação de fisher é muito sensitiva se o sistema não esta em forma periodica, ou está sobre ações
+de outras forças ela vai flutuar. Podemos claro aplicar a sistemas não periodicos, mas sua interepretação
+sera dificil (Sera que isso ainda é verdade? Pesquisar depois). \par
+Para observamos a transição, podemos simplesmete avaliar a integral em um periodo, colocando o valor como o valor do periodo todo. Isso
+da uma estimativa grosseira, digamos assim, onde ela vem, geralmente, em formato de blocos. Ou podemos
+fazer uma quase convolução, onde fazer a média movel, colocando o valor da integral como um unico ponto
+no espaço, onde a informação de fisher usa uma janela de tamanho equivalente ao periodo, centrada no
+ponto, posteriormente mudando nossa janela para o proximo ponto e assim sucessivamente. Os resultados
+realmente mostram uma mudança na informação de fisher entre um periodo e outro, então é sim um
+método válido. \par
+(Não sei dizer se necessariamente é quando muda a informação e como eles definem ser transição ou quando
+ele muda pra outro estado ciclo, talvez seja algo em relação a ecologia, ou já seja algo definido
+e na aplicação real a gente so conseguiria definir que esta mudando, sem necessariamente saber se esta
+indo para transição ou para outro estavel.)
+\subsection{Conclusões finais}
+Alguns pontos importantes a serem reforçados é que por mais que sejam uteis, a pesquisa ainda estão
+incompletas (isso é so uma preliminar do primeiro artigo, posteriormente adicionarei sobre novas biografias).
+Um dos pontos que precisam ser estudados é a regularização do intervalo de integração da informação, pois
+diferenças nesses tempos podem levar a graficos que são de dificil interpretação. Ademais, para sistemas
+aciclicos, não é de muita utlidade esse informação, pois ela variaria muito. Para sistemas muitos complexos,
+com muitas variaveis, ainda é meio dificil e não tão bom. Geralmente ela se da melhor com escalas temporais
+e sistemas um pouco menos complexos. O valor em si da informação ainda não é muito bem definido, valores
+altos indicam um sistema mais estavel, porem valores proximos necessariamente indicariam regimes parecidos,
+ou apenas com variabilidades parecidas? Quantas variaveis deveriamos considerar? Para escalas de tempo
+pequenas, ainda vamos conseguir usar isso para detectar? A informação ainda é extremamente sensitiva
+a forças internas, qualquer pertubação e casos em que não necessariamente é ciclico, já existe algum
+modelo que seja mais robusto a isso? Claramente a informação é muito util, porem é preciso ver seu
+desenvolvimento.
+\chapter{Importancia}
+Mais do que nunca no mundo vem se falando sobre a importancia dos nossos sistemas ecologicos. É
+inegavel o profundo impacto que fizemos no planeta, principalmente nos ultimos anos e agora estamos
+começando a lidar com as consequencias. Não é segredo que alteramos muito a ordem natural dos
+ecossistemas, seja de forma negativa ou de forma positiva. imaginando a situação em que queremos
+recuperar um certa área que foi afetada, seria muito util termos uma métrica ou uma ideia de se está
+funcionando, se o que está sendo feito está realmente sendo util. Claro que, teoricamente, apenas
+visualmente poderiamos tentar imaginar, mas algo que seja mais certeiro é desejado. Se selecionarmos
+uma certa quantia de variaveis, como por exemplo, tamanho populacional de uma certa especie,
+quantidade de um certo nutriente no solo, massa de liquens nas arvores, dentre outras, uma métrica
+que pudesse avaliar a evolução das variaveis com o tempo e que nos dissese com um numero, ou algo
+similar, que a evolução está acontecendo seria de grande ajuda. \par
+
+Identificação de mudanças em sistemas ecologicos tem algo que tem crescido muito nos ultimos e o uso
+de estatistica, principalmente na sua forma mais moderna, pode se tornar algo fundamental para essa
+área.(pensar em algo pra escrever melhor. Não muito bom)
+\include{Informação de fisher.tex}
+\include{Entropia de Shannon.tex}
+%\include{Ecologia.tex}
+\end{document}

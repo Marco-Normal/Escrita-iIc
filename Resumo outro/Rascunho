@@ -1,0 +1,138 @@
+Pesquiser sobre mudança de regimes. Que informações são usados, novas coisas, quais abordagens, e afins.
+Ver quem citou o artigo, ver na capes. Fica com a mente aberta. Ver se vai dar certo.
+Depois sentar, entender a matematica, preparar o codigo, buscar base de dados. Fazer uma introdução muito forte,
+que você esta certo sobre no assunto. Dar uma boa pesquisa, ja começar a escrever como tem sido o ambiente sobre.
+Pesquiser ideias, possiveis conjuntos de dados. Não precisa ser tão a fundo, mas precisa ser muito bom e coerente.
+Fazer um levantamento sobre a informação de fisher e sua utilidade, e ver se é util e alem dela, qual outras são usadas?
+Capes e quem citou esse artigo
+Dado certas condições de uma sequencia de dados \({x_i}\) 
+independentes e de variancia constante tal que temos uma \(E(x_i)=\mu \) se \(k \geq i\) caso
+contrario \(E(x_i)=\mu +\alpha \). Para estimarmos onde ocorre esse pulo, é a mesma coisa de achar o
+index \(k\) que maxima a razão de chances da função distribuição
+
+\subsection{Um pouco sobre sua derivação}
+(Rascunho) Començando com uma certa distribuição para o parametro \(\mathbf{x} \)  \footnotemark[1], tal que ele segue
+uma lei de formação vinda da distribuição condicional \(p(\mathbf{x}|\theta )\) aonde \(\theta \) é
+um parametro fixo e desconhecido. No mundo real, não sabemos esse valor \(\theta \) então só
+poderemos estima-lo. No mundo real tambem, nossos dados tirados dessa distribuição tambem vem com um
+certo barulho, de forma que a melhor forma de escrever é \(\mathbf{x} =\theta + \mathbf{\epsilon}\). 
+Onde \(\mathbf{x}\) é um vetor contendo os dados e \(\mathbf{\phi }  \) é o vetor contendo o
+barulho dos dados. Seguindo com a nossa analise, nosso \(\theta \) no maximo pode ser estimado e
+vamos fazer, claro, uma estivativa inteligente, ou seja, tentar pegar o estimador que minimza os
+erros. Para alguns casos pode ser a médias dos dados, por exemplo. Mas o importante é que nosso
+estimador \(\hat{\theta}\) seja em média o melhor que qualquer outro que exista. Um dos grandes
+problemas de pensarmos é que teriamos de achar alguma forma de tentar eliminar esse \(\theta \) de
+alguma forma.\par
+\footnotetext[1]{Quando falo nesse vetor \(\mathbf{x} \) me refiro que cada componente, tambem é um
+vetor, na qual se tivermos N vetores dentro deles, teremos N funções de distribuições. Ter apenas um
+dado não nos permite calcular a informação de fisher}
+
+Para isso, podemos pegar nossa distribuição e achar uma estastitica \(X\) tal que ela seja
+suficiente para que a expressão \(P(X^n|T=t,\theta )\) não dependa de \(\theta \). Ou seja, por mais
+que os dados sejam retirados necessidando de \(\theta\), tendo nossa estatistica, não necessitamos
+dele para futuros calculos. \par
+
+Outra forma de pensar e derivarmos isso é pensando na \textit{Desigualdade de Cramer-Rao}. Voltando
+a ideia do nosso estimador \(\hat{\theta} \), sendo não viesado e obedecendo a \(\left\langle
+\mathbf{\hat{\theta}(y)}\right\rangle=\theta \). O erro quadratico médio \(\epsilon^{2}\) na
+estimativa \(\hat{\mathbf{\theta}} \) obedece a relação:
+\begin{equation}\label{Eq:Desigualdade de Cramer-Rao}
+    \epsilon^{2} I\geq 1
+\end{equation} 
+Onde \(I\) é a infomação de fisher. Para o caso onde N=1, temos
+\begin{equation}\label{Eq:Informacao de Fisher}
+    I=\int \frac{p^{\prime2 }(x)}{p(x)}\mathrm{d}x
+\end{equation}
+Para caso N \(>2\), temos (conferir depois):
+\begin{equation}
+    I_{tot} =\sum_{i} \int \frac{p^{\prime2}_i(x)}{p_i(x)}\mathrm{d}x
+\end{equation}
+Onde é a soma de todas as informações de fisher para cada distribuição.
+
+(justificativa)
+
+Atualmente, mais do que nunca, se observa um grande fluxo de dados que são coletados e analisados
+por diversas áreas do conhecimento. Para uma ánalise significativa de alguma área de conhecimento,
+como por exemplo sobre alguma mudança em um determinado ecossistemas, centenas de variaveis são
+analisadas (referencia dps. Pega do estudo inicial) e para áreas de computação não se é incomum essa casa estar nas
+milhares. Surge então a necessidade de tentar resumi-las o maximo possivel, colapsando a vasta
+quantia de variaveis em poucos valores. \par
+
+Surgem então estatistica, em especifico o estudo sobre a teoria da informação, criada por Claude E.
+Shannon,  que alem de tentar a resumir a essas informações, tambem quantifica, a quantidade de
+informação que um sinal carrega. (referencia dps, livro sobre teoria da informação). Uma de suas
+principais métricas é a chamada entropia, que enquanto tem uma certa relação com a entropia no
+sentido termodinamico, esta que pode até ser calculada por uma formula da teoria da informação
+(referencia depois), carrega um sentido bem diferente, medindo a quantidade de informação que um
+sinal carrega, quanto maior a entropia, maior a desordem e maior a informação. \par
+
+Portanto, com o desenvolvimento dessa área foram criadas outras métricas e formulas para que seja
+feito essa quantificação. Alguns exemplos é a Informação de Fisher, a Entropia de Shannon, o Index
+de Gini, dentre outros. Tais metricas, umas mais que as outras, acharam muito sucesso,
+principalmente nas áreas de \textit{machine learning}, entretanto, nas áreas mais naturais, como
+ecologia, por exemplo, se teve uma certa dificuldade e resistencia quanto sua entrada. Todavia,
+certos modelos em especifico são completamente plausiveis quanto sua utilização e em teoria, são
+metricas validas para avaliar um sistema. \par
+
+Em ecologia, por exemplo, se mostral vital a analise das dinamicas de um determinado ecossistema,
+onde possivelmente diversas variaveis, internas e externas, podem e devem ser avaliadas. Enquanto em
+seu estagio inicial, foi mostral que a Informação de fisher é uma boa métrica a ser avaliada quanto
+à dinamica do sistema, onde pode-se resumir todas as informações das variaveis, com algumas
+limitações, a um unico valor e com ele se interpretar a mudanças de regimes ou não dentro do
+ecossistema (referencia dps. Artigo original+ o que a mari passou+ outros se necessario).\par 
+
+Por sua vez, a entropia de Shannon é amplamente utilizada na área de biodiversidade onde seu indice
+pode ser relacionado com a biodiversidade de um ecossistema com N especies. Esse valor é chamado de
+Index de Shannon e um valor alto relaciona com uma maior biodiversidade.
+
+
+(Possivelmente pode ser adicionado mais paragrafos com explicações sobre ecologia, cancer, covid
+etc, ou outras coisas sobre as metricas usadas)
+
+(Objetivos)
+
+Os obejtivos que podem ser citados são
+\begin{enumerate}
+    \item Melhorar o conhecimento sobre as métricas de avaliação de informação
+    \item Melhorar o conhecimento sobre as metricas usadas em ecologia
+    \item Entender as dificuldades e limitações das métricas atuais utilizadas e das métricas
+    propostas a serem utilizadas
+    \item Aplicar as tecnicas em algum conjunto de dados
+    \item Fazer a comparação dos resultados obtidos com as tecnicas utilizadas atualmente
+\end{enumerate}
+
+
+
+
+\section*{Respostas}
+	\begin{enumerate}
+		\item %L2-1
+			%\begin{multicols}{2}
+				\begin{enumerate}
+					\item $\mathbb{R}$
+					\item $\mathbb{R} \backslash \{3\}$
+					\item $\mathbb{R} \backslash \{1\}$
+					\item $\mathbb{R}$
+				\end{enumerate}
+			%\end{multicols}
+		\item
+		\item %L2-2
+			%\begin{multicols}{2}
+				\begin{enumerate}
+					\item $-\cos 2$
+					\item $1$
+				\end{enumerate}
+			%\end{multicols}
+		\item Não %L2-3
+		\item Sim %S-2.5-p118-44
+		\item $a=b=\frac{1}{2}$%S-2.5-p118-46
+		\item %S-2.5-p119-59
+		\item 
+			\begin{enumerate}
+				\item %S-2.5-p118-51
+				\item %S-2.5-p118-53
+			\end{enumerate}
+		\item $f(-1)=-1$, $f(0)=1$ e $f$ é contínua em $[-1,0]$ %G-c5-p123-1
+		\item Verifique que $f(x)=x^3-4x+2$ tem uma raiz real em cada intervalo $[-3,-2]$, $[0,1]$ e $[1,2]$ %G-c5-p123-2
+		\item %G-c5-p123-4
+	\end{enumerate}

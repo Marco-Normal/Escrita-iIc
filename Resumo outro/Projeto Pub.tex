@@ -1,0 +1,373 @@
+\documentclass{article}[12pt]
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{xcolor,amsmath,adjustbox,makecell}
+\usepackage{hyperref}
+\usepackage[num]{abntex2cite}
+\title{\textbf{Modelagem Estatística na área de Sustentabilidade: Uma análise bibliométrica.}}
+\date{}
+\author{}
+\citebrackets[]
+
+\begin{document}
+\maketitle
+
+\section{Resumo}
+
+A área de sustentabilidade vem ganhando enorme impulso ao longo dos anos, onde se vê um enorme
+crescimento de pesquisas científicas e uma maior preocupação com o impacto humano no meio ambiente.
+\par
+
+Nesse contexto, a área de estatística vem ganhando um papel de destaque crescente nessa área,
+principalmente pelo seu grande potencial de análise e interpretação de dados. Sendo ainda bastante
+recente, tal integração, diversas técnicas diferentes vem sendo aplicadas, em diferentes meios de
+atuação.  \par
+
+Dessa forma, durante o projeto será realizado uma revisão e análise bibliométrica da área de
+sustentabilidade, sendo feito a criação de um código-fonte com os princípios dessa análise.
+Posteriormente, será efetuado uma análise detalhada dos artigos de interesse, buscando identificar
+quais técnicas estão sendo as mais utilizadas. Por fim, será elaborado outro código-fonte de livre
+acesso, realizando a aplicação das técnicas mais utilizadas em um conjunto de dados de interesse.
+\par
+% {\color{red} Aguardar para escrever}
+
+\section{Justificativa}
+
+A engenharia e a pesquisa científica sempre possuiu um papel muito importante para o desenvolvimento
+humano. Desde a revolução industrial, % até a criação de
+inteligências artificiais, os dias essas áreas foram responsáveis por facilitar o trabalho humano.
+Entretanto, é importante tentar compreender como esse desenvolvimento está impactando o ambiente em
+que vivemos e como o progresso atual impacta nosso planeta. \par
+
+Nesse contexto, a sustentabilidade é definida como o meio a qual consegue-se integrar o
+desenvolvimento tecnológico, econômico e social, com a utilização correta e consciente dos recursos
+naturais, de modo a construir relações sociais e naturais, sustentáveis, ecológicas e resilientes
+para que não se comprometa nem o atual, nem o futuro \cite{UCLA_2021}.   
+
+Na primeira etapa deste projeto, pretende-se fazer uma análise bibliométrica onde será feito um
+levantamento bibliográfico detalhado sobre as principais pesquisas na área de sustentabilidade,
+assunto este de extrema importância. Já na segunda etapa deste projeto, pretende-se analisar os
+artigos mais recentes na área de sustentabilidade detalhadamente, em busca das metodologias
+estatísticas empregadas. Isto permitirá uma maior divulgação dos principais resultados já obtidos na
+área, além de entender o rumo das pesquisas recentes, quais as áreas que estão tendo um maior foco,
+permitindo assim identificar as principais métricas e métodos que estão sendo utilizados, além de
+identificar \textit{gaps} e tendências emergentes. \par
+
+
+
+%Ademais, entendendo-se as principais métricas e formas de análises utilizadas, consegue-se
+%identificar falhas e possíveis  deficiências que possuem, sendo possível corrigi-los e melhorar a
+%qualidade das análises e pesquisas futuras. \par
+
+
+
+%Uma análise bibliométrica de qualidade permite uma divulgação dos principais resultados e a
+%identificação de \textit{gaps} e tendências emergentes. 
+
+
+A proposta deste projeto vai de encontro com o destacado pelo novo diretor da EESC/USP. Em abril de
+2023, Prof. Catalano, no discurso de sua posse como diretor da Escola de Engenharia de São Carlos
+(EESC) relembrou a importância da engenharia e seu papel fundamental no progresso humano. Ele
+destacou a necessidade de a engenharia estar ligada ao desenvolvimento humano, principalmente em
+temas relacionados aos desafios globais, tais como mudanças climáticas, pobreza e proteção do meio
+ambiente. Conforme ressaltou em seu discurso ``Só recorrendo à ciência tem sido possível abrir
+caminhos para ações mais assertivas. Quanto mais intensas as necessidades de novas descobertas e
+soluções, mais se torna importante o campo de trabalho da ciência, da tecnologia e das engenharias.
+Trabalho este que a USP faz com maestria. O ensino de engenharia tem que promover não só a
+conscientização do problema ambiental, mas a solução do problema'' \cite{Cruz2023} \\ \\
+
+
+
+\section{Objetivos}
+
+
+\subsection{Objetivo Geral}
+O objetivo desse projeto é realizar um mapeamento do desenvolvimento cientifico na área da
+sustentabilidade, com possível enfoque na(s) sub-área(s) de resiliência, \textit{flips} ecológicos
+e/ou quantificação da biodiversidade. Além disso, pretende-se efetuar uma análise detalhada e
+rigorosa, visando identificar as principais técnicas e métodos estatísticos que estão sendo
+utilizados atualmente. 
+
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+\item Realizar a análise bibliométrica da área de sustentabilidade, com possível enfoque na(s)
+sub-área(s) de resiliência, \textit{flips} ecológicos e/ou quantificação da biodiversidade;
+%e sinecologia
+\item Escrever um código-fonte comentado de livre acesso, com os princípios de análise
+bibliométrica;
+\item Realizar uma leitura detalhada de todos os artigos mais recentes publicados na(s) sub-área(s)
+de interesse, identificando as técnicas estatísticas mais utilizadas atualmente;
+\item Aplicar pelo menos duas das técnicas estatísticas em um conjunto de dados, com
+disponibilização do código-fonte criado para tal fim.
+\end{itemize}
+
+\section{\textbf{Metodologia}}
+
+\subsection{Sustentabilidade}
+
+A área de sustentabilidade compreende uma gama de assuntos, tais como: o estudo da resiliência de um
+ecossistema, %\footnote{Para mais informações acesse 
+\cite{Dakos2022, Eason2013, Boschetti2019}, análise de \textit{shifts} ecológicos
+%\footnote{Para mais informações acesse
+\cite{Mayer2006, Clare2017} e quantificação da biodiversidade de um ecossistema
+%\footnote{Para maiores informações acesse 
+\cite{Sherwin2019, Daly2018, Roswell2021}. \par
+%e a sinecologia. {\color{cyan} Acha que precisa de um paragrafo explicando cada, ou apenas a
+% explicação acima esta de bom tamanho?  } {\color{red} Acho que pode detalhar um pouco mais. }
+O estudo da resiliência de um ecossistema busca quantificar e entender o quanto um ecossistema é
+resiliente quanto a pertubações, ou seja, em um acontecimento de alguma interferência, humana ou
+não, o quanto ele conseguiria se recuperar e voltar ao seu estado original \cite{Dakos2022}. \par
+
+A análise de \textit{shifts} ecológicos, por modelos, indicadores e análises, estatísticas e
+ambientais, quando um ecossistema está sofrendo uma mudança de estado, saindo de seu estado
+original, de equilíbrio e indo para outro, que pode ser de equilíbrio ou não \cite{Clare2017}. \par
+
+Já a quantificação da biodiversidade de um ecossistema, por sua vez, através de modelos matemáticos,
+estatísticos e computacionais, quantificar a biodiversidade de um ecossistema, ou seja, inferir o
+quão diverso ele é,  seja na quantidade de populações, especies, regimes ecológicos. Podendo ser
+quantificado até mesmo dentro de uma mesma população o quão diversa ela é \cite{Sherwin2019}. \par
+
+De acordo com a Organização das Nações Unidas (ONU), a sustentabilidade pode ser definida como
+"Suprir as necessidades do presente sem comprometer as gerações futuras de suprir as suas próprias
+necessidades" \cite{onenvironment1987common}. A partir desta definição, se tem um caminho muito
+claro para o futuro desejado do desenvolvimento humano, onde deve-se buscar o equilíbrio entre as
+necessidades da atualidade e a saúde do planeta para as próximas gerações. 
+
+\par
+Neste sentido, no ano de 2015, a ONU estabeleceu 17 objetivos de desenvolvimento sustentável, que
+são uma série de objetivos que devem ser alcançados até 2030 por todos os países membros da ONU
+\cite{Agenda2023}. Ao longo destes 15 anos (de 2015 a 2030), todos os países pertencentes à
+organização devem adotar políticas alinhadas com esses desenvolvimentos sustentáveis, contribuindo
+assim para que se alcance tais objetivos. \par
+
+
+É de consentimento geral que a sustentabilidade é um dos maiores desafios enfrentados pela
+humanidade atualmente. Com o crescimento populacional, o aumento da produção industrial e o aumento
+do consumo, a demanda por recursos naturais vem aumentando cada vez mais. Com a proposta da ONU de
+desenvolvimento sustentável, se vê crescente a preocupação com esse tema, principalmente com a
+implementação de novas políticas ambientais e de desenvolvimento que diversos países vem adotando
+\cite{SDG2022},
+%{\color{red} como XXX (citar algumas se possível).}
+Política nacional de bio-combustíveis \cite{RenovaBio2017}, no Brasil, O plano ABC
+\cite{PlanoABC_2016} e o Decreto N° 11.075, este que estabelece medidas para diminuir as mudanças
+climaticas observadas \cite{Decreto11075}.Na união europeia, se tem projetos de expandir a
+\textit{Natura 2000 network} para 30\% do território \cite{Mller2020}.  Ademais, países como a
+França buscam mudar suas fontes de energias para aquelas que impactam menos o meio ambiente, como a
+nuclear, solar e eólica \cite{Lebrouhi2022}.
+\par
+
+
+Ainda se observa um enorme espaço disponível para que novas ideias e pesquisas sejam aplicadas nessa
+área, de forma a conseguir manter uma balança entre o desenvolvimento humano e a saúde do planeta.  
+Neste sentido, a área de engenharia e de estatística, possuem um papel fundamental no
+desenvolvimento e no aprimoramento de tecnologias de modo a compreender o problema e buscar soluções
+para os desafios globais de sustentabilidade.
+\par
+
+
+Como a área de sustentabilidade é extremamente interdisciplinar e abrangente, se faz necessário uma
+análise mais específica sobre o que está sendo feito e quais as tendências que estão sendo seguidas.
+O mapeamento geral do desenvolvimento cientifico permitirá que se compreenda tendências e
+identifique possíveis \textit{gaps}. A Análise Bibliométrica, que será apresentada na seção
+seguinte, é uma ferramenta útil para construir tal mapeamento.\par
+
+\subsection{Estatística}
+
+Estatística é um ramo da matemática que tem ganho cada vez mais importância sua evolução ocorre de
+maneira muito rápida. A partir das técnicas desenvolvidas nesta disciplina é possível coletar
+informações, organizar, interpretar e  analisar os dados de maneira adequada, o que permite extrair
+conclusões corretamente a partir da análise feita. 
+
+Pesquisas são feitas constantemente para tomada de decisões nas mais diversas áreas, a partir da
+análise de processos reais. 
+%Desde análises simples, como médias e variâncias, a análises mais complexas e rigorosas, como
+%testes de hipóteses, explicações de variância e modelos de regressão, a estatística é uma das áreas
+%de maiores importâncias para praticamente todas as disciplinas científicas. \par
+Na área de sustentabilidade, a estatística vem ganhando uma grande importância, com descobertas e
+novas formas de aplicação de modelos estatísticos para a análise em diversos tópicos da área. Em um
+trabalho seminal, por exemplo, foi se discutido a teoria da análise de \textit{flips} ecológicos
+utilizando a informação de \textit{fisher}, com resultados bastantes positivos, embora algumas
+limitações \cite{Mayer2006}. %\par
+Com o uso dessa teoria, consegue-se analisar de forma mais rápida e eficiente essas mudanças, para
+que identifique se um ecossistema está sofrendo uma mudança de estado e como poderia reverter-se, ou
+minimizar esses impactos. Enquanto ainda experimental, artigos mostram bastante promessa para essa
+teoria %\footnote{Veja, 
+\cite{Karunanithi2008, Rawlings2020, Konig2019}. \par
+
+Ademais, pode-se citar o uso da teoria da informação, que está sendo bastante utilizada, tanto para
+quantificar a sensibilidade e robustez de modelos de ecossistemas \cite{Ulanowicz2009}, a
+quantificação do quanto há mudança em um sistema, ou seja, suas mudanças em biomassa,
+\cite{Boschetti2019}, a quantificação da resiliência de um sistema \cite{Boschetti2019} e análise de
+interações entre espécies e a teoria de diversidade funcional \cite{Mouchet2010, Sherwin2019}.
+
+As ferramentas estatísticas utilizadas na área de sustentabilidade não se restringem aos casos
+mencionados acima. Um mapeamento detalhado sobre as metodologias usadas atualmente no tratamento de
+dados de sustentabilidade é essencial para a compreender a área e vislumbrar novas perspectivas. 
+
+% {\color{red} Escrever algo geral, sobre importância da estatística, análise de dados, predição...
+% se for possível OU importância da predição, do uso de modelos estatísticos em sustentabilidade
+% (não sei qual a bibliografia mais fácil de encontrar). Se for difícil escrever essa subseção,
+% excluímos este item, sem problemas.}
+
+\subsection{Análise Bibliométrica}
+
+%falar sobre filtros e palavras-chave
+
+Conforme discutido em \cite{Ramakrishna2022}, se observa uma crescente produção cientifica na área
+de sustentabilidade, de forma que o número de publicações cresce, anualmente, de modo exponencial.
+%Com isso, se mostra uma certa tendência que ao vem tomando cada vez mais importância esse assunto e
+%mais e mais cientistas estão se dedicando a ele. \par Mais do que nunca vem se observando um
+%crescente número de artigos científicos sendo publicados. Com o maior acesso ao ensino superior ao
+%redor o mundo, a produção cientifica está mais crescente do que nunca. \cite{Fire2019}. 
+Com esse grande número de publicações e a alta velocidade de disseminação do conhecimento, se faz de
+extrema importância uma atualização constante, bem como, um olhar mais firme quanto aos conteúdos
+divulgados.
+
+Com este grande volume de informações, se tornou cada vez mais difícil fazer uma boa análise
+bibliométrica, principalmente manualmente. A medida que essa dificuldade aumentou, cresceu-se também
+a necessidade de análises mais amplas e profundas sobre os assuntos que se desejava estudar
+\cite{Mongeon2016, Huang2017}. A junção desses fatores, aliado com o desenvolvimento da tecnologia,
+fez emergir a análise bibliométrica, capaz de realizar análises científicas mais amplas e profundas
+sobre qualquer tópico de interesse. \par
+
+A análise bibliométrica permite mapear e entender o campo de pesquisa de interesse. Para isso, o
+pesquisador deve definir alguns critérios de pesquisa, como palavras-chaves, período considerado e
+tipos das publicações, dentre outros. A partir desta análise é possível
+%estudar relações entre centros de pesquisa, autores e artigos científicos 
+encontrar, através de análises estatísticas e matemáticas, as relações, os padrões e as conexões
+existentes entre os artigos, autores e centros de pesquisa que publicam sobre o assunto. Além disso,
+também é possível analisar
+%de relações de autores, onde determinado tópico esta sendo mais
+publicado, quais os assuntos de interesse e o impacto de determinado autor ou centro de pesquisa
+% teve sobre um determinado assunto.
+\cite{Narin1994, Aksu2019}. \par
+
+%Essa analise se tornou possível, em maior escala, com a criação de uma métrica mais unificada para
+%a avaliação de trabalhos científicos. Inicialmente, a primeira dessas métricas foi o índice de
+%citação cientifica, que hoje em dia, faz parte da Web of Science \cite{Mongeon2016}. Ao longo do
+%tempo, aconteceu o desenvolvimento de outras métricas, que podem ser citadas o índice H, o índice
+%G, o fator de impacto dentre diversas outras. \par
+
+Portanto, a partir de uma análise bibliométrica, consegue-se identificar os avanços em uma
+determinada área do conhecimento, dentro do tópico de interesse, podendo efetuar uma análise mais
+profunda sobre as metodologias ou resultados mais importantes, além de se criar um mapa geral sobre
+o assunto relevante \cite{Mongeon2016}. \par
+
+Diversas revistas e sites de publicações possuem um banco de dados onde oferecem a possibilidade de
+realizar pesquisas considerando critérios definidos pelo pesquisador. Estes filtros incluem campos
+como  autoria, área do conhecimento, número de citações, revista publicada, etc. Dentre os sites que
+permitem tais buscas pode-se destacar o \textit{Google Scholar}, \textit{Scopus} e \textit{Web of
+Science}. Neste projeto, pretende-se realizar a pesquisa da análise bibliométrica a partir do
+\textit{Web of Science} e a análise de dados e a construção de gráficos serão feitas usando o
+\textit{software R} e o \textit{VoSViewer}.
+%Ademais, será necessário fazer toda essa aquisição, sendo indispensável algum tipo de programa que
+%consiga faze-lo de forma eficiente. 
+\par
+
+\subsection{Ferramentas a serem utilizadas}
+
+\subsubsection{Software RStudio}
+O programa que será utilizado para a análise bibliométrica é o \textit{RStudio}. O \textit{RStudio}
+é um software livre de ambiente de desenvolvimento integrado para \textit{R}, uma linguagem de
+programação voltada para gráficos e cálculos estatísticos, de livre acesso e de fácil utilização
+\cite{Rstudio2021}. Este \textit{software} permite realizar uma vasta gama de operações, desde as
+mais comuns até operações mais avançadas. \par
+
+O \textit{R} possui uma vasta coleção de pacotes e bibliotecas que podem ser utilizados para
+estender suas funcionalidades. Em consonância com o objetivo deste trabalho, destaca-se o
+\textit{Bibliometrix}, um pacote poderoso para a análise de dados bibliométricos. \par
+
+\subsubsection{Pacote Bibliometrix}
+
+O pacote \textit{Bibliometrix} é voltado para a análise bibliométrica, sendo amplamente utilizado
+por diversos pesquisadores.
+%Ela se utilizada de diversas bases de dados para que seja feita a busca analise desses dados,
+%dentre esses, incluem o Scopus, Web of Science, Lens.org, etc \cite{Bibliometrix2017}.
+Este pacote possui diversas funções pré-programadas que podem ser utilizadas
+%dentre elas a busca
+por palavras-chaves, autores, revistas, área do conhecimento, etc. Além disso, ele possui funções
+que podem ser
+% utilizadas para 
+permitindo, a partir delas, a criação de gráficos e tabelas de autores, países, centros de estudo e
+de artigos, possibilitando a elaboração de tabelas com os artigos ou autores mais influentes na área
+no momento da pesquisa. Em junção com o \textit{RStudio}, é possível criar uma análise bibliométrica
+completa, com elaboração de gráficos e estatísticas \cite{Bibliometrix2017}. 
+
+Vale salientar que tais resultados devem sempre ser analisados e interpretados pelo pesquisador
+responsável pela análise bibliométrica. Uma boa análise bibliométrica apresenta, além destes
+resultados, a identificação de \textit{gaps} e tendências emergentes na área de interesse. \par
+
+Junto com o \textit{RStudio / Bibliometrix}, pretende-se também utilizar neste trabalho o pacote
+\textit{VOSviewer}.
+
+
+\subsubsection{Pacote VosViewer}
+
+O \textit{VosViewer} é um software gratuito utilizado para visualização gráfica das relações entre
+os artigos, autores, centros de estudos e palavras-chaves. Mais especificamente, o
+\textit{VosViewer} é um programa que pode ser utilizado para a visualização de redes de citações, de
+co-autoria, de palavras-chaves, etc. Ele consegue gerar mapas de teias de relação, observando-se
+onde cada artigo se encaixa e sua relação com outro artigo. Além disso, ele consegue gerar mapas de
+clusterização, de calor e de densidade, de forma que se consiga ter uma visão geral sobre o assunto
+desejado \cite{VOSviewer2010}. \par
+
+O \textit{VOSviewer} é um programa de fácil utilização e que, com as análises produzidas pelo
+\textit{RStudio / Bibliometrix}, fornecem uma análise abrangente sobre a área de pesquisa.
+
+%pode ser utilizado em conjunto com o \textit{RStudio}. , de forma que a busca e analise será feita
+%pelo ele e o Bibliometrix, com a visualização sendo feita pelo VOSviewer. \par
+
+
+\section{Detalhamento das atividades a serem desenvolvidas pelo bolsista}
+
+As atividades a serem desenvolvidas pelo bolsista no decorrer do projeto consistem, na primeira
+etapa, de uma análise bibliométrica na área de sustentabilidade, com possível enfoque na(s)
+sub-área(s) de resiliência, \textit{flips} ecológicos e/ou quantificação da biodiversidade. Em uma
+segunda etapa, o aluno realizará uma leitura detalhada de todos os artigos mais recentes publicados
+na(s) sub-área(s) de interesse, identificando as técnicas estatísticas mais utilizadas atualmente.
+Por fim, aplicará pelo menos duas das técnicas estatísticas em um conjunto de dados da área de
+sustentabilidade. Para a análise de dados, o aluno utilizará o software R.
+
+\section{Resultados previstos e seus respectivos indicadores de avaliação}
+
+O resultado direto esperado com o desenvolvimento das atividades deste projeto é aumentar o
+interesse do estudante participante com a pesquisa científica. Além disso, espera-se que ao final do
+projeto o estudante tenha uma melhor noção dos conceitos e dos fundamentos específicos dos tópicos
+trabalhados, tornando-o ciente das dificuldades e desafios vinculados a problemas de origem
+técnico-científicos. Espera-se também que os resultados obtidos neste trabalho possam enriquecer o
+entendimento e contribuir na busca do entendimento deste problema extremamente complexo e de caráter
+multifatorial.
+
+\section{Cronograma de execução}
+
+\begin{table}[h]
+    \begin{adjustbox}{width=1.5\textwidth,center=\textwidth}
+    \begin{tabular}{|c||l||c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    & & \multicolumn{12}{c|}{\textbf{Mês de execução}} \\ \hline
+    \textbf{Etapa} & \textbf{Descrição} & 01 & 02 & 03 & 04 & 05 & 06 & 07 & 08 & 09 & 10 & 11 & 12
+    \\ \hline
+    1 & \makecell[l]{Definição das palavras-chaves\\ e filtros que serão utilizados\\
+    na análise bibliométrica}& \huge{x}& \huge{x}&&&&&&&&&&\\ \hline
+    2 &\makecell[l]{Elaboração do código-fonte\\ para análise bibliométrica} & \huge{x}& \huge{x}&
+    \huge{x}&&&&&&&&&\\ \hline
+    3 &\makecell[l]{Realização da\\ análise bibliométrica}&&&&\huge{x}&&&&&&&&\\ \hline
+    4 &\makecell[l]{Organização e interpretação dos\\ resultados obtidos na Etapa
+    3}&&&&&\huge{x}&\huge{x}&&&&&&\\ \hline
+    5 &\makecell[l]{Leitura completa e detalhada\\ de todos os artigos mais\\
+    recentes publicados, identificando\\ as técnicas estatísticas e demais \\
+    informações importantes}&&&&&&&\huge{x}& \huge{x}& \huge{x}&&&\\ \hline
+    6 &\makecell[l]{Organização dos\\ resultados obtidos na Etapa 5}&&&&&&&&&&\huge{x}&\huge{x}&\\
+    \hline
+    7 &\makecell[l]{Elaboração do Relatório Final}&&&&&&&&&&&&\huge{x}\\
+    \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+\bibliography{Referencias}
+
+\end{document}
+
+

@@ -1,0 +1,283 @@
+\chapter{Uma analise profunda da informação de Fisher}
+\section{Um passo para trás}
+Eu acho que é importante para realmente entender e fazer as corretas derivações necessarias, ter o
+conhecimento de infomações que precedem o nosso objetivo final, tanto para realmente entender, não
+so copiar uma formula, tanto para entender de onde possivelmente são os erros e possiveis locais de
+melhoria. Então por enquanto, farei uma pesquisa sobre as materias que levam à informação de fisher.
+\subsection{Estatistica suficiente}
+Colocando que temos um conjunto de dados \(X_1,X_2,\ldots ,X_n\) gerados por uma função de
+probabilidade qualquer com parametro \(\theta \), se existir uma estatistica
+\(Y=u(X_1,X_2,\ldots,X_n)\), tal que a condicional \(P(X_1,X_2,\ldots ,X_n|Y=y)\) não depender de
+\(\theta \). Exemplo: \par
+Dado uma distribuição de bernoulli, com parametro \(\theta \) desconhecido, onde se fazem n testes
+tal que existam n dados. Uma estatistica suficiente para esse parametro é a soma de todos os
+\(X_i\), pois:
+\begin{align*}
+    Y=\sum_{i} X_i \\
+    P(X_1,X_2,\ldots ,X_n|Y=y)&=\frac{p(X_1=x_1,X_2=x_2,\ldots ,X_n=x_n,Y=y)}{P(Y=y)}\\
+    &=\frac{P(X_1=x_1,X_2=x_2,\ldots ,X_n=x_n,\sum_{i} X_i=x_i)}{P(\sum_{i} X_i=x_i)}
+\end{align*}
+Não dependendo do parametro \(\theta\). Ou seja, conseguimos toda informação possivel sobre o
+parametro, apenas com essa estatistica, pois independente dele, adicionando, retirando dados,
+nenhuma informação a mais sobre o parametro será ganhada. \par
+
+Infelizmente, essa condição não nos da o necessario para calcularmos que estatistica será essa,
+então ainda é um grande de um trabalho imaginarmos isso. Por sorte, temos um teorema que nos ajudará
+nesse quesito, o \textit{Teorema da Fatorização} em que ele fala que se uma estatistica
+\(Y=u(X_1,X_2,\ldots ,X_n)\), so é suficiente se e apenas se, a distribuição
+\(f(x_1,x_2,\ldots,x_n;\theta )\), que gerou dos dados, pode ser fatorizada em dois fatores,
+\(\phi,h \), da forma \(f(x_1,x_2,\ldots,x_n;\theta )=\phi
+(u(x_1,x_2,\ldots,x_n);\theta)h(x_1,x_2,\ldots,x_n)\), onde \(\phi\) que é dependente dos dados
+apenas por meio de \(u(x_1,x_2,\ldots,x_n)\) e \(h\) é independente do parametro. Vamos à um
+exemplo:
+Suponha uma bernoulli de parametro \(\theta \) desconhecido e constante. Coletando n dados de forma
+independente, podemos achar nossa estatistica de modo
+\begin{align*}
+    f(x_1,x_2,\ldots ,x_n;\theta)&=f(x_1,\theta)*f(x_2,\theta)*\ldots*f(x_n,\theta)\\
+    &=\theta^{x_1}(1-\theta)^{1-x_1}*\theta^{x_2}(1-\theta)^{1-x_2}*\ldots*\theta^{x_n}(1-\theta)^{1-x_n}\\
+    &=\theta^{\sum_{i} x_i}(1-\theta)^{n-\sum_{i}x_i} 
+\end{align*}
+O parametro \(\theta \) apenas interage com a estatistica e a função \(h\) é uma constante de valor 1.
+\subsection{Maxima Verossemelhança}
+Outro tópica que sera discutido e posteriormente usado será o de maxima verossemelhança. Esse
+conceito é muito usado em questão de estimação de parametros e estatistica Bayesiana e nos servira
+bem para o proposito final. \par
+
+Supondo que temos uma certa quantia de dados, vindos de uma distribuição qualquer, com um parametro
+\(\theta \), fixo, com valores podendo estar num intervalo fechado ou não. Idealmente, gostariamos de
+tentar achar a curva de melhor encaixe nesses dados. Por facilidade, vamos colocar que sabemos que
+eles se originam de uma curva normal de parametros desconhecidos. Sabemos a priori que a curva
+normal está centrada na média e sua dispersão e peso da cauda relaciado à sua variacia. Seus
+parametros pode assumir qualquer valor na reta dos reais, então, em tese, teriamos infinitas curvas
+que se encaixariam nos nossos dados. Porem, podemos supor, até mesmo empiricamente, que alguma delas
+tem que se encaixar a melhor, até por que nossos dados foram tirados dessa curva com parametros
+fixos. Como poderiamos tentar determinar, ou testar, se algum parametro é melhor do que outro? \par
+
+Para isso, temos a ideia das chances e da maxima verossemelhança. Vamos começar com as chances.
+Elas, diferente do entendimento popular, são diferentes das probabilidades. Elas não seguem as
+mesmas regras, de que, por exemplo, tem de ser somada 1 no seu inteiro. Alem disso, elas se diferem
+de uma probabilidade condicional por uma constante K, da forma L(\(\theta\))=K*P(\(X=x_i|\theta \)).
+Onde \(\theta \) seja nosso parametro, ou parametros. Sozinha, não temos muita interpretação passa
+essa chance, dado a constante K que não tem valor de interpretação para nós. Então, ela vem sempre a
+titulo de comparação para nos. Nossa chance, é em relação ao parametro, então é justo assumir que
+uma comparação entre duas chances, na forma de razão, nos diria o quanto uma é superior a outra.
+Supondo por exemplo, que a comparação L(\(\theta_1\))/L(\(\theta_2\) ) nos de um valor de 1.5.
+Significaria que os dados tem 1.5 vezes maior probabilidade de estarem sobre o parametro
+\(\theta_1\) do que do parametro \(\theta _2\).\par
+
+Isso nos leva a pensar, existiria algum parametro tal que sua razão de chances sempre dê um valor
+maior que 1? Sim, isso é dito pela Lei da verossimilhança. \textit{Dentro de um modelo estatistico,
+um conjunto de dados sempre vai se encaixar melhor em um parametro do que em outro, tal que as
+chances do primeiro parametro sempre vai ser maior que a do segundo.}\par
+\subsection{Chances}
+Enquanto ja é um começo, isso não nos da uma função clara de como achar esse parametro. Para isso,
+temos alguns meios de seguirmos. O primeiro, usando um pouco de calculo, é achar o maximo e minimo
+de funções. Como temos uma função das chances pelo valor de \(\theta \) podemos tentar achar o nosso
+pico da função. Lembrando de calculo, seria derivar e igualar a zero. Porem, é muitas vezes mais
+facil achar o maximo do log da função. Maximizar o log da função é igual a maximizar a função. Para
+uma binomial, por exemplo, se quisermos estimar o parametro \(\theta \) fazemos
+\begin{gather*}
+    P(X=x_i)=\binom{x}{n}\theta^x*(1-\theta)^{n-x}\\
+    \log (P(X=x_i)) = \log (\binom{x_i}{n}) +x\log (\hat{\theta} )+(n-x)\log (1-\hat{\theta} )\\
+    \frac{\mathrm{d}P}{\mathrm{d}\hat{\theta} } =\frac{\mathrm{d}}{\mathrm{d}\hat{\theta} } \log (\binom{x_i}{n})+
+    \frac{\mathrm{d}}{\mathrm{d}\hat{\theta} }x\log (\hat{\theta} )+\frac{\mathrm{d}}{\mathrm{d}\hat{\theta} }(n-x_i)\log (1-\hat{\theta})\\
+    0=\frac{x_i}{\hat{\theta} }-\frac{n-x_i}{1-\hat{\theta} }\\
+    n\hat{\theta}-x\hat{\theta}=x-x\hat{\theta}\\
+    \hat{\theta}=\frac{x}{n}
+\end{gather*}
+Se nossa distribuição fosse multimodal, uma solução explicitamente analitica talvez não fosse
+possivel, então metodos numericos teriam de ser utilizados.\par
+\subsection{Desigualdade de Cramer-Rao}
+Se tivermos um conjunto de dados todos retirados de uma mesma função de probabilidade na forma
+\(f(\vec{x},\theta )\), onde se tem n dados e 1 parametro. Se cada dado for independente, pela regra
+de probabilidade, sua distribuição conjunta é \(f_{\mathbf{X}}(\vec{x},\theta)\). Similarmente, seu
+produto de chances é dado por \(L_{\mathbf{X}}(\theta )=\prod_{i=1}^{n}= f_{\mathbf{X}}(x_i,\theta )\). Supondo
+agora, que \(L_{\mathbf{X}}(\theta)\) seja diferenciável em todo espaço e não dependa de \(\theta
+\), mais especificadamente, não tenha suporte em \(\theta \). Se integramos a função de chances,
+\(L_{\mathbf{X}} \) em todo espaço, teremos o valor de 1. Isso é dado que ela é so o produtorio de
+todas as funções de densidade. O produto de varias funções de densidade nos da uma função de
+densidade e por definição, em todo espaço, sua probabilidade é 1. Ou seja
+\begin{align}
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,  L_{\mathbf{X}}(\theta ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=1\\
+    \intertext{Derivando-a, parcialmente em \(\theta\) temos:}\notag\\
+    \frac{\partial}{\partial \theta } \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,  L_{\mathbf{X}}(\theta ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=0\\
+    \intertext{Como definimos que não há suporte em \(\theta \) nas nossas distribuições, podemos colocar a
+    diferencial dentro da integral.}\notag\\  
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \, \frac{\partial}{\partial \theta } L_{\mathbf{X}}(\theta ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=\\
+    \intertext{fazendo uma certa manipulação albegrica, temos}\notag
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,\frac{1}{L_{\mathbf{X}}(\theta )} \frac{\partial}{\partial \theta } L_{\mathbf{X}}(\theta ) L_{\mathbf{X}}(\theta )\,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=\\
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,\frac{\partial}{\partial \theta } \ln (L_{\mathbf{X}}(\theta )) \cdot L_{\mathbf{X}}(\theta )\,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=  (\theta )\\
+    \theta \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,\frac{\partial}{\partial \theta } \ln (L_{\mathbf{X}}(\theta )) \cdot L_{\mathbf{X}}(\theta )\,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=\\
+    \label{eq:1 da fisher}
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,\frac{\partial}{\partial \theta } \ln (L_{\mathbf{X}}(\theta )) \cdot L_{\mathbf{X}}(\theta ) \cdot \theta \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=
+\end{align}
+Guardemos essa nossa equação. Vamos trabalhar agora estimando nosso parametro \(\theta \). Seja
+\(\hat{\theta} \) um estimar do meu parametro orginal, tal que \(E(\hat{\theta}) =\theta  \). Por
+definição de esperança, podemos reescrever a equação como:
+\begin{align}
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \, \hat{\theta}  L_{\mathbf{X}}(\theta ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=\theta\\
+    \frac{\partial }{\partial \theta } \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \, \hat{\theta}  L_{\mathbf{X}}(\theta ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=\frac{\partial }{\partial \theta } \theta\\
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \, \hat{\theta}   \frac{\partial }{\partial \theta }L_{\mathbf{X}}(\theta ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=1\\
+    \label{eq:2 da fisher}
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \, \hat{\theta}   \frac{\partial }{\partial \theta }\log (L_{\mathbf{X}}(\theta) ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,...\mathrm{d}x_n&=
+\end{align}
+Subtraindo as equações \eqref{eq:2 da fisher} e \eqref{eq:1 da fisher}
+\begin{align}
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \, (\hat{\theta}-\theta) \frac{\partial }{\partial \theta }\log (L_{\mathbf{X} }(\theta) ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,\ldots ,\mathrm{d}x_n&=1\\
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \, (\hat{\theta}-\theta) \frac{\partial }{\partial \theta }\log (L_{\mathbf{X} }(\theta) ) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,\ldots, \mathrm{d}x_n&=\\
+    (\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,\sqrt{L_{\mathbf{X} }(\theta)} (\hat{\theta}-\theta) \frac{\partial }{\partial \theta }\log (L_{\mathbf{X} }(\theta))\sqrt{L_{\mathbf{X} }(\theta)} \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,\ldots, \mathrm{d}x_n)^{2}&=
+    \intertext{Lembrando de algebra linear, tal forma é reconhecida como um produto escalar entre dois vetores
+    onde podemos, então, separa-los e aplicar a regra de cauchy-schwartz}\\ \notag
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty}  \,L_{\mathbf{X} }(\theta) (\hat{\theta}-\theta)^{2} \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,\ldots, \mathrm{d}x_n& \cdot \\
+    \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \ldots \int_{-\infty}^{\infty} (\frac{\partial }{\partial \theta }\log (L_{\mathbf{X} }(\theta)))^{2} L_{\mathbf{X} }(\theta) \,\mathrm{d}x_1  \,\mathrm{d}x_2 \,\ldots, \mathrm{d}x_n& \geq 1 \notag
+\end{align}
+A primeira parte reconhecemos como a variancia dos nossos dados. A segunda parte, nada mais é
+que a definição da informação de fisher, onde é o valor esperado, esperança, da função score
+\begin{equation}
+    \label{eq:desigualdade de Cramer-Rao}
+    Var(\theta ) \cdot E[\frac{\partial}{\partial \theta } \ln (L(\theta )^{2})L(\theta)]\geq 1 
+\end{equation}
+Alem de mostrar de onde surge a equação de fisher, foi mostrado tambem outro ponto muito importante,
+que foi a desigualdade de Cramer-Rao. Essa desigualdade mostra que a informação de fisher é
+inversamente proporcional ao erro, ou variancia do nosso modelo. Ou seja, com uma informação de
+fisher extremamente alta, nosso erro sera extremamente baixo e vice-versa \par
+
+Falando um pouco mais sobre a função score. Ela é definida da seguinte forma:
+\begin{equation}
+    S(\theta)=\frac{\partial}{\partial \theta } \ln L(\theta )
+\end{equation}
+Seu valor tende a 0 quando nosso parametro estimado \(\hat{\theta} \) tende a \(\theta \). Vamos
+achar sua esperança.
+\begin{align}
+    \label{eq:Esperanca do score}
+    E_{\theta }S(\theta)&=\int_{-\infty}^{\infty} p_{\theta } (x)S(\theta ) \,\mathrm{d}x\\
+    &=\int_{-\infty}^{\infty} \frac{\partial }{\partial \theta } \ln L(\theta )p_{\theta } (x) \,\mathrm{d}x\\
+    &=\int_{-\infty}^{\infty} \frac{\frac{\partial }{\partial \theta } L(\theta )}{L(\theta )}p_{\theta } (x) \,\mathrm{d}x\\
+    &=\int_{-\infty}^{\infty} \frac{\partial }{\partial \theta } L(\theta )\,\mathrm{d}x\\
+    &=\frac{\partial }{\partial \theta }\int_{-\infty}^{\infty}  p_{\theta } (x)\,\mathrm{d}x\\
+    &=0
+\end{align}
+Sua variancia, por sua vez é definida pela esperança da informação de fisher, \(\mathcal{I}\), dado
+o valor real de \(\theta \).
+\begin{equation}
+    \mathcal{I} =E[\frac{\partial}{\partial \theta } \ln (L(\theta )^{2})]=var_{\theta} S(\theta) 
+\end{equation}
+\begin{equation}
+    \mathcal{I}=\int_{-\infty}^{\infty} (\frac{\partial }{\partial \theta } \ln L(\theta))^{2}  L(\theta)\,\mathrm{d}x 
+\end{equation}
+Ela é util para todos os valores possiveis de \(\theta \), enquanto a
+informação de fisher observada, dada pelas equações nos capitulos inicias so é util nas vizinhanças
+de \(\hat{\theta} \). De forma mais simples, \(\mathcal{I} \) é uma função de \(\theta \) para todos
+os valores admissiveis de \(\theta \), dando uma média, por se dizer, atraves de todos os set de
+dados. Esse valor nos da um valor geral para a curvatura da função score. O valor observado de
+fisher, nosso I comum, nos da apenas para um unico dataset. O valor esperado, nosso \(\mathcal{I} \)
+nos diz quão dificil vai  ser estimar nosso parametro, valores maiores implicam maior facilidade de
+estimação. Para um modelo de Cauchy, dado a densidade de probabilidade \(p(x)=[\pi (1+x-\theta )^{2}]^{-1}\)
+\[
+    I(\theta )=-\sum_{i} 2\frac{[(x_{i}-\theta)^{2}-1 ]}{[(x_{i}-\theta)^{2}+1 ]^{2} }
+\]
+\[
+    \mathcal{I} =-2nE_{\theta }\frac{(X_1-\theta )^{2} -1}{[(X_{1}-\theta)^{2}+1 ]^{2}}=\frac{n}{2} 
+\]
+\(I(\theta ) \neq \mathcal{I}\), qual dos dois é melhor escolher? \(I(\theta )\) para \(n=N\) nos
+diz uma probabilidade de \(I(\hat{\theta}  )\) cair dentro de um intervalo. \(\mathcal{I} \) nos diz
+a curvatura média. Qual é mais relevante? Posteriormente retornarei a esse problema. \par
+
+Voltando a ideia da desigualdade de Cramer-Rao. Demonstrado que ela é valida no caso de
+\(E(\hat{\theta})=\theta\), mas se formos para um caso mais geral, onde
+\(E(\hat{\theta})=g(\theta)\), como nossa desigualdade fica? Bom, como tivemos que derivar e elevar
+ao quadrado para chegarmos na desigualdade, sendo \(g(\theta )\) diferenciavel, teremos
+\begin{equation}\label{eq:Cramer-Rao para caso gerais}
+    Var(\theta ) \cdot E(\frac{\partial}{\partial \theta } \ln (L(\theta ))^{2} )\geq (g^\prime (\theta ))^{2} 
+\end{equation}
+\subsection{Uma analise sobre as diferenças entre \(I\) e \(\mathcal{I} \)}
+
+Como foi colocado no capitulo anterior, existe uma diferença entre esses dois valores e irei me
+debruçar um pouco mais sobre suas diferenças. \(I\) é definido como \(-\frac{\partial^{2}}{\partial \theta^{2} }\ln L(\theta) \)  
+Em termos matematicos, analisando seu significado geometrico e sua derivada. Como isso, com valores
+para todos as variaveis, nos da um escalar, essa informação nos da o valor da curvatura da função
+score em um determinado \(\theta \). Valores de pico, muito altos, nos dizem que se tem uma menor
+incerteza quanto ao parametro, valores proximos a zero nos dizem que há uma grande incerteza quanto
+ao valor, indicando maior incerteza. Ele é estimado para o valor de maxima verossimilhança (MLE). O
+MLE, na teoria de estimativa, nos conta uma estimativa no qual se tem maior chance do nosso
+parametro está. Para perguntas do tipo, com um conjunto de dados, qual a melhor estimativa,
+geralmente o MLE nós da uma resposta bem decente. \(I\) geralmente, vem junto com o estimador
+\(\hat{\theta} \) então se é util acha-lo. Para isso, podemos resolver a equação \(S(\theta )=0\),
+lembrando que \(S(\theta)=\frac{\partial }{\partial \theta } \ln (L(\theta))\). Onde achar essa
+solução nos da o MLE, ou seja, o \(\hat{\theta} \). De forma mais importante, essa informação,
+dependente do estimador, varia de dataset a dataset. Pensando numa normal, por exemplo, se fossemos
+tirar 100 dados, 5 vezes da mesma distribuição, a probabilidade da média ser igual é praticamente
+zero. Então, o valor de \(I\) seria diferente para cada uma delas. So seria uma util uma analise nas
+redondezas de \(\hat{\theta} \). Essa informação de fisher é local e sensivel a mundaças de
+coordenadas. \par
+
+Por sua vez \(\mathcal{I} \) é definida como a varianca da função score, ou em outros termos,
+\(E_{\theta }(\frac{\partial }{\partial \theta } L(\theta ))^{2}\), ou, \(-E_{\theta }(\frac{\partial^{2}  }{\partial \theta^{2}  } L(\theta ))\).
+Repare nas diferenças, \(\mathcal{I} \) é o valor esperado da informação de fisher. \(\mathcal{I} \)
+é a esperança de \(I\). Então, se \(I\) era a curvatura da função score em um determinado
+\(\hat{\theta} \), \(\mathcal{I}\) vai nos dizer a curvatura média da função. Ademais, ele apresenta
+algumas propriedades mais interessantes. Ele é invariante quanto a mudanças de coordenadas, ou seja,
+se nossa função \(p(y|\theta )\) puder ser descrita como \(p_X(y-\theta)\), ambas nos darão o mesmo
+valor de \(\mathcal{I} \). Para uma transformação de parametros, tal que \(\phi =g(\theta)\) para
+qualquer distribuição \(g()\). A função score de \(\phi \) é dada por.
+\begin{align}
+    S(\phi)&=\frac{\partial }{\partial \phi }\ln  L(\theta )\\
+    &=\frac{\partial \theta }{\partial \phi } \ln  L(\theta )\\
+    &=\frac{\partial \theta }{\partial \phi }S(\theta)
+\end{align}
+E sua informação de fisher \(\mathcal{I} \) é
+\begin{align}
+    \mathcal{I} (\phi )&=varS(\phi )\\
+    &=(\frac{\partial \theta  }{\partial \phi  })^{2} \mathcal{I}(\theta)\\
+    &=\frac{\mathcal{I}(\theta)}{(\partial \phi /\partial \theta )^{2}}
+\end{align}
+Para uma poisson:
+\begin{align*}
+    \mathcal{I} (\theta)=\frac{n}{\theta  }\\
+    \mathcal{I} (\ln \theta )=\frac{n/\theta }{1/\theta^{2} }=\theta
+\end{align*}
+
+\subsubsection{Matrizes de informação de Fisher}
+
+Até dito momento so analisamos a informação de fisher para um parametro \(\theta \), ou seja, em uma
+normal, assumimos que conheciamos a variancia \(\sigma^{2} \), mas, se por exemplo, não conhecermos
+nem a media \(\mu \) nem a variancia \(\sigma^{2} \) como podemos descrever a informação observada e
+esperada de fisher? Bom, para isso temos nossa matriz, a qual podemos colocar nossas informações
+nela. A informação de fisher observada, na sua forma matricial pode ser dada por: \par
+Seja \(\vec{\theta} \) o vetor coluna que contem todos os parametros variando de 1 a n. Para a \(i\)
+observação, a informação de fisher pode ser descrita como
+\begin{equation}\label{eq:informacao de fisher observada matricial}
+    F_i(\vec{\theta})=(\frac{\mathrm{d}}{\mathrm{d}\vec{\theta} } \ln L(\vec{\theta}))
+    (\frac{\mathrm{d}}{\mathrm{d}\vec{\theta} } \ln L(\vec{\theta})^{\top})
+\end{equation}
+Onde \(\frac{\mathrm{d}}{\mathrm{d}\vec{\theta} } \ln L(\vec{\theta})\) é um vetor coluna \(n \
+\mathsf{x} \ 1\), onde nossa matriz de informação sera \(n \ \mathsf{x} \ n\). Para a informação
+esperada, basta apenas fazer a esperança da matriz.
+\begin{equation}\label{eq:informacao de fisher esperada matricial}
+    F_i(\vec{\theta})=E[(\frac{\mathrm{d}}{\mathrm{d}\vec{\theta} } \ln L(\vec{\theta}))
+    (\frac{\mathrm{d}}{\mathrm{d}\vec{\theta} } \ln L(\vec{\theta})^{\top})]
+\end{equation}
+Para o caso de derivadas de segunda ordem. Temos \par
+Para a observação \(m,n\) temos:
+\begin{equation}\label{eq:informacao de fisher observada matricial segunda ordem}
+    F_i(\vec{\theta})=-\frac{\partial^{2} }{\partial \theta_m \partial\theta_j} \ln L(\theta )
+\end{equation}
+Similarmente para a esperada
+\begin{equation}\label{eq:informacao de fisher esperada matricial segunda ordem}
+    F_i(\vec{\theta})=-E(\frac{\partial^{2} }{\partial \theta_m \partial\theta_j} \ln L(\theta))
+\end{equation}
+\par
+Pensando agora em uma limitação dela, se fossemos pegar a definição integral da informação de
+fisher, \(\int_{-\infty}^{\infty} (\frac{\partial }{\partial \theta } \ln L(\theta ))^{2}*L(\theta )  \,\mathrm{d}x \),
+\(\frac{\partial }{\partial \theta }L(\theta )= \frac{f^\prime (x|\theta )}{f(x|\theta)}\), essa função ela é indefinida se
+\(f(x|\theta) \to 0 \), o que necessariamente ocorre dado um certo \(x\). Para contornarmos essa
+situação podemos fazer uma substituição \(p(x)=g^{2}(x)\), de forma que nossa nova equação fica:
+\begin{align}
+    \mathcal{I} &=\int_{-\infty}^{\infty} (\frac{\partial }{\partial \theta } \ln L(\theta ))^{2}  \,\mathrm{d}x\\
+    &=\int_{-\infty}^{\infty} (\frac{f^\prime (x) }{f(x)})^{2} f(x)  \,\mathrm{d}x\\
+    &=\int_{-\infty}^{\infty} \frac{(2g(x))^{2} g^\prime(x)^{2} }{g(x)^{2}}  \,\mathrm{d}x\\
+    &=4\int_{-\infty}^{\infty} g^\prime (x)^{2}   \,\mathrm{d}x 
+\end{align}
+Essa nova forma é a forma de amplitude da nossa informação. Ela então evitaria esse problema da não
+existencia se \(p(x)\to 0\). Ademais, talvez não se aplicaria muito ao nosso caso, mas a integral e
+o gradiente tem de existir, sendo uma condição necessaria essa.
